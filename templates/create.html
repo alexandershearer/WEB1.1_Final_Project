@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+    <h1>New Game</h1>
+
+    <form method='POST'>
+        <fieldset>
+            <legend>Please tell me about your game:</legend>
+
+            <label>
+                Video Game's name:
+                <input type="text" name="game_name">
+            </label>
+
+            <label>
+                Game Genre:
+                <input type="text" name="genre">
+            </label>
+
+            <label>
+                Game Cover URL:
+                <input type="url" name="cover">
+            </label>
+
+            <label>
+                Last session played:
+                <input type="date" name="date_played">
+            </label>
+
+            <input type="submit" class="submit" value="Submit!">
+        </fieldset>
+    </form>
+</main>
+
+{% endblock content %}

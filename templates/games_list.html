@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+    <div id="content">
+        <h1>My Game Library</h1>
+        <a href="/create" class="nav">+ New Game</a>
+
+
+        <div id="items">
+            {%for game in games%}
+            <div class="card">
+                <a href="/game/{{game['_id']}}"><img src="{{game['cover_url']}}"></a>
+                <div class="card-content">
+                    <a href="/game/{{game['_id']}}">{{game['name']}}</a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+
+    </div>
+</main>
+
+{% endblock content %}

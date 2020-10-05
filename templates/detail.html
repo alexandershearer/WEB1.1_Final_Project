@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+    <h1> {{ game['name'] }} </h1>
+
+    <img class="detailImg" src="{{ game['cover_url'] }}">
+
+    <section id="info">
+        <h3>Info</h3>
+
+        <strong>Started Playing</strong>
+        {{ game['date_played'] }}
+        <br><br>
+
+        <strong>Genre</strong>
+        {{ game['genre'] }}
+        <br><br>
+
+        <a class="nav" href="/edit/{{game['_id']}}">Edit Game</a><br><br>
+    </section>
+
+    <form action="/session/{{game['_id']}}" method="POST">
+        <fieldset>
+            <legend>Session:</legend>
+
+            <labrl>
+                Hours played
+                <input type="text" name="session_time">
+            </labrl>
+
+            <label>
+                Session played
+                <input type="date" name="date_played">
+            </label>
+
+            <input type="submit" class="submit" value="Log Hours!">
+
+        </fieldset>
+    </form>
+
+    <section id="session_history">
+        <h3>Session History</h3>
+
+        <ul>
+            {% for session in sessions %}
+                {% set currentSession = session %}
+                {% set currentGame = game['_id'] %}
+
+                {% if currentSession['game_id'] == currentGame %}
+                <li>{{ currentSession['date'] }} : {{ currentSession['hours'] }} Hours</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+
+    <form action="/delete/{{game['_id']}}" method='POST' id="delete-form" onsubmit="return confirm_delete()">
+        <input type="submit" class="nav" onclick="delete_modal()" value="Delete Game">
+    </form>
+
+</main>
+
+{% endblock content %}

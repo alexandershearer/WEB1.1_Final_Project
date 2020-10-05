@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+    <h1>Edit Game</h1>
+
+    <form method='POST'>
+        <fieldset>
+            <legend>Please tell me about the game you were playing:</legend>
+
+            <label>
+                Game's name:
+                <input type="text" name="game_name" value="{{game['name']}}">
+            </label>
+
+            <label>
+                Game's Genre:
+                <input type="text" name="genre" value="{{game['genre']}}">
+            </label>
+
+            <label>
+                Game's cover URL:
+                <input type="url" name="photo" value="{{game['cover_url']}}">
+            </label>
+
+            <label>
+                Date played:
+                <input type="date" name="date_played" value="{{game['date_played']}}">
+            </label>
+
+            <input type="submit" class="submit" value="Submit!">
+        </fieldset>
+    </form>
+</main>
+
+{% endblock content %}
