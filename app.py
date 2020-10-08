@@ -73,7 +73,7 @@ def session(game_id):
 @app.route('/edit/<game_id>', methods=['GET', 'POST'])
 def edit(game_id):
     if request.method == 'POST':
-        mongo.db.plant.update_one(
+        mongo.db.game.update_one(
             {'_id': ObjectId(game_id)},
             {
                 '$set': {
