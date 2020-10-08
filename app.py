@@ -4,9 +4,11 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
+#Setup pymongo DB
 app.config["MONGO_URI"] = "mongodb://localhost:27017/gamesDatabase"
 mongo = PyMongo(app)
 
+#My home page with games
 @app.route('/')
 def games_list():
 
@@ -21,7 +23,7 @@ def games_list():
 def about():
     return render_template('about.html')
 
-
+#Make the create function in order to add games to the library
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
@@ -40,7 +42,7 @@ def create():
     else:
         return render_template('create.html')    
 
-
+#The viewing page for a specific game for when you add it and when you want to edit it
 @app.route('/game/<game_id>')
 def detail(game_id):
     display_game = mongo.db.games.find_one({'_id': ObjectId(game_id)})
@@ -54,6 +56,7 @@ def detail(game_id):
 
     return render_template('detail.html', **context)
 
+#Creating and logging new sessions for your games
 @app.route('/session/<game_id>', methods=['POST'])
 def session(game_id):
     new_session = {
